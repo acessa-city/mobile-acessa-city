@@ -1,4 +1,5 @@
 import API from './API';
+//import { AsyncStorage } from 'react-native';
 export const TOKEN_KEY = "@api-Token";
 export const isAuthenticated = () => localStorage.getItem(TOKEN_KEY) !== null;
 export const getToken = () => localStorage.getItem(TOKEN_KEY);
