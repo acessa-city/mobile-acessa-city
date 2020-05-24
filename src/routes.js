@@ -1,32 +1,40 @@
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import Main from './pages/Main';
-import Profile from './pages/Profile';
+import  Main  from './pages/Main';
+import  Report from './pages/Report';
+import  SetReport from './pages/SetReport';
 
-const Routes = createAppContainer(
+const Routes  = createAppContainer(
     createStackNavigator({
-        Main:{
+        Main: {
             screen: Main,
-            navigationOptions:{
-                title: 'DevRadar',
+            navigationOptions: {
+                title: 'Acessa City'
             }
         },
-        Profile:{
-            screen: Profile,
-            navigationOptions:{
-                title: 'Pefil no Github'
+        Report: {
+            screen: Report,
+            navigationOptions: {
+                title: 'Lista de Denúncias'
             }
         },
-    },{
-        defaultNavigationOptions:{
-            headerTintColor: '#FFF',
-            headerBackTitleVisible: false,
-            headerStyle:{
-                backgroundColor: '#7D40E7',
+        SetReport: {
+            screen: SetReport,
+            navigationOptions: {
+                title: 'Denúnciar'
+            }
+        }
+    }, {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: '#909090',
+                
             },
+            headerTintColor: '#fff',
+            headerTitleAlign: "center"
         },
     })
 );
 
-export default Routes; 
+export default Routes;
