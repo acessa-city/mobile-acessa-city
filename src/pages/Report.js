@@ -38,6 +38,7 @@ function Report({ navigation }) {
     event.preventDefault();
 
     navigation.navigate('SetReport');
+    console.log("Pressionado!");
   }
 
   return (
