@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Image, View, Text, TextInput, TouchableOpacity, Button} from 'react-native';
-import MapView, {Marker, Callout} from 'react-native-maps';
+//import MapView, {Marker, Callout} from 'react-native-maps';
 import {requestPermissionsAsync, getCurrentPositionAsync} from 'expo-location';
 import { MaterialIcons } from '@expo/vector-icons';
 
 //import api from '../services/api';
 
 function Main({navigation}){
-    const [devs, setDevs] = useState([]);
+    /* const [devs, setDevs] = useState([]);
     const [currentRegion, setCurrentRegion] = useState(null);
     const [techs, setTechs] = useState('');
 
@@ -33,7 +33,7 @@ function Main({navigation}){
         }
         loadInitialPosition();
     }, [])
-
+ */
     /* async function loadDevs(){
         const {latitude, longitude} = currentRegion;
 
@@ -49,14 +49,14 @@ function Main({navigation}){
         setDevs(response.data.devs);
     } */
 
-    function handleRegionChanged(region){
+   /*  function handleRegionChanged(region){
         setCurrentRegion(region);        
 
     }
 
     if(!currentRegion){
         return null;
-    }
+    } */
 
     const loadReport = event => {
         event.preventDefault();
@@ -66,11 +66,11 @@ function Main({navigation}){
 
     return(
         <>
-            <MapView 
+           {/*  <MapView 
                 onRegionChangeComplete={handleRegionChanged} 
                 initialRegion={currentRegion} 
                 style={styles.map}
-            />
+            /> */}
             <Button 
                 onPress = { loadReport }
                 title = "Denúciar"

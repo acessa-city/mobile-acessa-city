@@ -103,8 +103,7 @@ function SetReport({ navigation }) {
             ...denunciation,
             values: {
                 ...denunciation.values,
-                title: event.target.value,
-                description: event.target.value,
+                [event.target.name]: event.target.value
                 
             }
         });

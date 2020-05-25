@@ -11,8 +11,16 @@ import enviroment from './src/enviroments/enviroment-dev';
 export default function App() {
 
   firebase.initializeApp(enviroment.firebase);
-
   firebase.auth().languageCode = 'pt-br';
+
+  firebase.auth().onIdTokenChanged(function(user) {
+    if (user) {
+      // API.post('/auth').then((result) => {
+      //   CurrentUser.setUser(result.data);
+      //   console.log("UserFromAPI", CurrentUser.getUser());
+      // })
+    }
+  });
 
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
