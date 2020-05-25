@@ -13,14 +13,6 @@ import { TextInput, Button } from 'react-native';
 import API from '../utils/API';
 
 
-const Item = ({ title }) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
-
-
-
 function Report({ navigation }) {
   const [reports, setReports] = useState({});
 
@@ -28,11 +20,12 @@ function Report({ navigation }) {
     async function loadReports() {
       const response = await API.get("/report");
 
-      setReports(response.data[0]);
+      setReports(response.data);
     }
 
     loadReports();
-  }, [])
+  }, []);
+  let testeArray = [{name: 'testeMap', id:1}]
 
   function loadSetReport(event) {
     event.preventDefault();
@@ -41,18 +34,36 @@ function Report({ navigation }) {
     console.log("Pressionado!");
   }
 
+   {
+    testeArray.map(cat => {
+      console.log(cat.name, cat.id);
+    })
+  } 
+
   return (
-    <View>
-      <Text>
-        {reports.title}
-      </Text>
-      <Button 
-        onPress={ loadSetReport }
-        title= "Criar nova Denúncia"
-      />
-    </View>
+
+    <>
+      <View>
+        <Text>
+          Olá
+        </Text>
+        <Button
+          onPress={loadSetReport}
+          title="Criar nova Denúncia"
+        />
+
+        <View>
+          {
+            testeArray.map(cat => {
+              <Text> {cat.name} </Text>                
+            })
+          }
+        </View>
+      </View>
+    </>
   );
 }
+
 
 
 

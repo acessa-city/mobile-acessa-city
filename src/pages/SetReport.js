@@ -1,43 +1,89 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Text, Button } from 'react-native';
+import { View, TextInput, Text, Button, FlatList, StyleSheet, StatusBar, SafeAreaView, ListView} from 'react-native';
+import Constants from 'expo-constants';
 import API from '../utils/API';
-
 
 
 
 
 function SetReport({ navigation }) {
 
+    function Item({ title }) {
+        return (
+            <View style={styles.item}>
+                <Text style={styles.title}>{title}</Text>
+            </View>
+        );
+    }
+
+    const [category, setCategory] = useState({
+        values: [{
+            id: '',
+            name: '',
+            category: {}
+        }]
+    })
 
     const [denunciation, setDenunciation] = useState({
         //isValid: false,
         values: {
             title: '',
             description: '',
-            urgencyLevelId: '553b0d79-20c1-49f3-8c2d-820128a293af',
-            userId: 'f409f2a9-583c-4800-917e-6e5570541472',
-            reportStatusId: '48cf5f0f-40c9-4a79-9627-6fd22018f72c',
-            latitude: '-22.9064',
-            longitude: '-47.0616',
-            categoryId: '5874a25e-9ca4-4b27-9dea-d03e95fab3f6',
-            accuracy: 1.9,
-            cityId: '7ae590f1-c6a4-4bb3-91bf-1e82ea45bb4b'
+            urgencyLevelId: '',
+            userId: '',
+            reportStatusId: '',
+            latitude: '',
+            longitude: '',
+            categoryId: '',
+            accuracy: '',
+            cityId: ''
         },
-        /* "userId": "ec3b2a5d-ff91-49e3-b295-3b6c742d2b84",
-        "categoryId": "c706e299-1e53-41ab-93dc-de8783bfea90",
-        "urgencyLevelId": "553b0d79-20c1-49f3-8c2d-820128a293af",
-        "reportStatusId": "48cf5f0f-40c9-4a79-9627-6fd22018f72c",
-        "title": "TITULO 3",
-        "description": "33333333333333.",
-        "latitude": -22.89292,
-        "longitude": -47.16625,
-        "accuracy": 1.9,
-        "cityId": "7ae590f1-c6a4-4bb3-91bf-1e82ea45bb4b"
-        //touched: {},
-        //errors: {} */
     });
 
+    function loadCategories() {
+        API.get("/category")
+            .then(result => {
+                console.log('/n' + "Tamanho do Array category" + result.data.length);
+            });
+    }
 
+    useEffect(() => {
+
+        /*  API.get("/user/e0ae5c2b-c2d3-4567-8002-24a29a38c001")
+             .then(result => {
+                 console.log("USER " + JSON.stringify(result.data));
+             }); */
+
+        API.get("/category")
+            .then(result => {
+                /*  setDenunciation({
+                     values: {
+                         categoryId: result.data[0].id
+                     }
+                 }) */
+
+                setCategory({
+
+                    values: {
+                        id: result.data.id,
+                        name: result.data.name
+                    }
+
+                });
+                console.log('\n' + JSON.stringify(result.data[0].id));
+            });
+
+    }, []);
+
+    /* useEffect(() => {
+        api.get('/report/'+reportId).then((result) => {
+            setReport(result.data)
+            api.get('/report-commentary/report/' + reportId).then((comments) => {
+                setCommentaries(comments.data)
+            })
+        })
+
+    }, []) */
     /* useEffect(() => {
         
         setUserId( userId = "f409f2a9-583c-4800-917e-6e5570541472");
@@ -95,6 +141,11 @@ function SetReport({ navigation }) {
                 console.log('Erro!' + error);
             });
     }
+    const onChecked = event => {
+        event.preventDefault();
+
+    };
+
     const handleChange = event => {
 
         event.persist();
@@ -104,13 +155,15 @@ function SetReport({ navigation }) {
             values: {
                 ...denunciation.values,
                 [event.target.name]: event.target.value
-                
+
             }
         });
     };
 
     return (
         <>
+
+
             <View>
                 <Text>Titulo</Text>
                 <TextInput
@@ -130,14 +183,39 @@ function SetReport({ navigation }) {
                     value={denunciation.values.description || ''}
                     variant="outlined"
                 />
-                <Button
+                <SafeAreaView style={styles.container}>
+                    <FlatList
+                        data={category.values}
+                        renderItem={({ item }) => <Item title={item.name} />}
+                        keyExtractor={item => item.id}
+                    />
+                </SafeAreaView>
+
+                {/*  <Button
                     onPress={onSubmit}
                     title="Enviar"
                     color="#841584"
-                />
+                /> */}
+
             </View>
         </>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        marginTop: Constants.statusBarHeight,
+    },
+    item: {
+        backgroundColor: '#f9c2ff',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
+    },
+    title: {
+        fontSize: 32,
+    },
+});
 
 export default SetReport;
