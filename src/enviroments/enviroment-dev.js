@@ -10,7 +10,7 @@ const enviroment = {
         appId: "1:810134304715:web:040e88d44425f0e9f5684e",
         measurementId: "G-VFS8ZJ3ECW"
     },
-    apiUrl: "http://18.234.57.35/api/v1"
+    apiUrl: "http://localhost:5000/api/v1"
 };
 
 export default enviroment;

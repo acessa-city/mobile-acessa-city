@@ -10,7 +10,7 @@ import enviroment from './src/enviroments/enviroment-dev';
 
 export default function App() {
 
-  firebase.initializeApp(enviroment.firebase);
+  /* firebase.initializeApp(enviroment.firebase);
   firebase.auth().languageCode = 'pt-br';
 
   firebase.auth().onIdTokenChanged(function(user) {
@@ -32,7 +32,7 @@ export default function App() {
     } else {
       logout();
     }
-  });
+  }); */
 
   const loadReport = event => {
     event.preventDefault();
